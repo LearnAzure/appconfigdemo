@@ -1,0 +1,25 @@
+﻿@page
+@using Microsoft.Extensions.Configuration
+@using Microsoft.Extensions.Options
+@using AppConfigDemo.Core
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@inject IOptions<AppSettings> AppSettings
+@inject IOptions<AppConfig> AppConfig
+@inject IOptionsSnapshot<AppConfigRefresh> AppConfigRefresh
+@inject IConfiguration Configuration
+
+
+<div class="text-left">
+    <h2 class="display-5 pt-5">App Settings (Configuration)</h2>
+    <p>Hello <code>@AppSettings.Value.ToWhom</code> from <code>@AppSettings.Value.FromWhere</code></p>
+
+    <h2 class="display-5 pt-5">App Configuration Service (Global)</h2>
+    <p>Hello <code>@AppConfig.Value.ToWhom</code> from <code>@AppConfig.Value.FromWhere</code></p>
+    <p>Currently "Always Changing" Value: <code>@AppConfigRefresh.Value.AlwaysChanging</code></p>
+
+    <h2 class="display-5 pt-5">App Configuration Service (With Key Vault)</h2>
+    <p>MyAppDB Connection String: <code>@Configuration.GetConnectionString("MyAppDB")</code></p>
+</div>
